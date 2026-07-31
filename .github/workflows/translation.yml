@@ -1,0 +1,47 @@
+name: Update translations
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/locales/en/**/*.json"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out application repository
+        uses: actions/checkout@v4
+
+      - name: Generate translations
+        uses: peter-calabrese/localization@v1
+        with:
+          files: |
+            src/locales/en/common/app.json
+            src/locales/en/components/textField.json
+        env:
+          LOCALES_ROOT: src/locales
+          AZURE_TRANSLATOR_KEY: ${{ secrets.AZURE_TRANSLATOR_KEY }}
+          AZURE_TRANSLATOR_REGION: ${{ secrets.AZURE_TRANSLATOR_REGION }}
+
+      - name: Open translation pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/update-translations
+          delete-branch: true
+          commit-message: "chore: update translations"
+          title: "chore: update translations"
+          body: |
+            Automated translation update generated from the English locale files.
+          add-paths: |
+            src/locales/es/**
+            src/locales/fr/**
+            .translation-cache/cache.json
