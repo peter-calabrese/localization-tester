@@ -1,0 +1,7 @@
+{
+  "previous": "過去",
+  "nested": {
+    "nestedKey": "ネストされた鍵"
+  },
+  "someotherkey": "こんにちは、世界"
+}
