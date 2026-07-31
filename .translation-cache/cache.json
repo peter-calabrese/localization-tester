@@ -1,0 +1,27 @@
+{
+  "common/app": {
+    "previous": {
+      "source": "Previous",
+      "languages": [
+        "es",
+        "fr"
+      ]
+    },
+    "nested.nestedKey": {
+      "source": "Nested Key",
+      "languages": [
+        "es",
+        "fr"
+      ]
+    }
+  },
+  "components/textField": {
+    "errorMessage": {
+      "source": "Must enter {{minLength}} characters ",
+      "languages": [
+        "es",
+        "fr"
+      ]
+    }
+  }
+}
