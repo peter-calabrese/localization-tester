@@ -116,3 +116,4 @@ jobs:
             Source commit: ${{ github.sha }}
           add-paths: |
             ${{ steps.translate.outputs.translated-paths }}
+            .translation-cache/cache.json
