@@ -13,6 +13,13 @@
         "es",
         "fr"
       ]
+    },
+    "someotherkey": {
+      "source": "hello world",
+      "languages": [
+        "es",
+        "fr"
+      ]
     }
   },
   "components/textField": {

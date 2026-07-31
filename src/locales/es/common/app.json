@@ -2,5 +2,6 @@
   "previous": "Anterior",
   "nested": {
     "nestedKey": "Llave anidada"
-  }
+  },
+  "someotherkey": "Hola mundo"
 }

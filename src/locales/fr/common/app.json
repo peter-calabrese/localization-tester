@@ -2,5 +2,6 @@
   "previous": "Précédent",
   "nested": {
     "nestedKey": "Clé imbriquée"
-  }
+  },
+  "someotherkey": "Bonjour le monde"
 }
