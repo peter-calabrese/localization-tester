@@ -1,4 +1,5 @@
 {
   "confirm": "Confirm",
-  "deny": "Deny"
+  "deny": "Deny",
+  "error": "ACH error, please try again"
 }
