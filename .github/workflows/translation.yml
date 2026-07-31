@@ -24,7 +24,7 @@ jobs:
         id: locales
         shell: bash
         env:
-          LOCALES_ROOT: ${{ vars.LOCALES_ROOT }}
+          LOCALES_ROOT: src/locales
           EVENT_NAME: ${{ github.event_name }}
           BEFORE_SHA: ${{ github.event.before }}
           CURRENT_SHA: ${{ github.sha }}
