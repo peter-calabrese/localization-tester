@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Check out application repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -24,13 +24,35 @@ jobs:
         id: locales
         shell: bash
         env:
-          LOCALES_ROOT: src/locales
+          CONFIGURED_LOCALES_ROOT: ${{ vars.LOCALES_ROOT }}
           EVENT_NAME: ${{ github.event_name }}
           BEFORE_SHA: ${{ github.event.before }}
           CURRENT_SHA: ${{ github.sha }}
         run: |
+          locales_root="${CONFIGURED_LOCALES_ROOT:-src/locales}"
+          source_root="${locales_root}/en"
+
+          echo "locales_root=$locales_root" >> "$GITHUB_OUTPUT"
+
+          if [[ ! -d "$source_root" ]]; then
+            echo "::error::Locale source directory does not exist: $source_root"
+            exit 1
+          fi
+
           if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
-            files="$(find "$LOCALES_ROOT/en" -type f -name '*.json' -print)"
+            files="$(
+              find "$source_root" -type f -name '*.json' -print | sort
+            )"
+          elif [[ "$BEFORE_SHA" =~ ^0+$ ]] || ! git cat-file -e "${BEFORE_SHA}^{commit}" 2>/dev/null; then
+            files="$(
+              git diff-tree \
+                --no-commit-id \
+                --name-only \
+                --diff-filter=AMR \
+                -r "$CURRENT_SHA" \
+                -- "$source_root" |
+              awk '/\.json$/'
+            )"
           else
             files="$(
               git diff \
@@ -38,12 +60,14 @@ jobs:
                 --diff-filter=AMR \
                 "$BEFORE_SHA" \
                 "$CURRENT_SHA" \
-                -- "$LOCALES_ROOT/en/*.json" "$LOCALES_ROOT/en/**/*.json"
+                -- "$source_root" |
+              awk '/\.json$/'
             )"
           fi
 
           if [[ -z "$files" ]]; then
             echo "has_files=false" >> "$GITHUB_OUTPUT"
+            echo "No changed locale files found."
           else
             echo "has_files=true" >> "$GITHUB_OUTPUT"
             {
@@ -51,21 +75,35 @@ jobs:
               echo "$files"
               echo "EOF"
             } >> "$GITHUB_OUTPUT"
+
+            echo "Files selected for translation:"
+            echo "$files"
           fi
 
+      - name: Restore translation cache
+        if: steps.locales.outputs.has_files == 'true'
+        uses: actions/cache@v5
+        with:
+          path: .translation-cache
+          key: translation-cache-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            translation-cache-${{ runner.os }}-
+
       - name: Generate translations
+        id: translate
         if: steps.locales.outputs.has_files == 'true'
         uses: peter-calabrese/localization@v1
         with:
           files: ${{ steps.locales.outputs.files }}
+          locales-root: ${{ steps.locales.outputs.locales_root }}
+          languages: ${{ vars.TRANSLATION_LANGUAGES || 'es,fr' }}
         env:
-          LOCALES_ROOT: ${{ vars.LOCALES_ROOT }}
           AZURE_TRANSLATOR_KEY: ${{ secrets.AZURE_TRANSLATOR_KEY }}
           AZURE_TRANSLATOR_REGION: ${{ secrets.AZURE_TRANSLATOR_REGION }}
 
       - name: Open translation pull request
         if: steps.locales.outputs.has_files == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: automation/update-translations
@@ -77,6 +115,4 @@ jobs:
 
             Source commit: ${{ github.sha }}
           add-paths: |
-            ${{ vars.LOCALES_ROOT }}/es/**
-            ${{ vars.LOCALES_ROOT }}/fr/**
-            .translation-cache/cache.json
+            ${{ steps.translate.outputs.translated-paths }}
