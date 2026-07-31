@@ -1,12 +1,10 @@
 name: Update translations
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
-    paths:
-      - "src/locales/en/**/*.json"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -19,19 +17,54 @@ jobs:
     steps:
       - name: Check out application repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Find changed locale files
+        id: locales
+        shell: bash
+        env:
+          LOCALES_ROOT: ${{ vars.LOCALES_ROOT }}
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          CURRENT_SHA: ${{ github.sha }}
+        run: |
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            files="$(find "$LOCALES_ROOT/en" -type f -name '*.json' -print)"
+          else
+            files="$(
+              git diff \
+                --name-only \
+                --diff-filter=AMR \
+                "$BEFORE_SHA" \
+                "$CURRENT_SHA" \
+                -- "$LOCALES_ROOT/en/*.json" "$LOCALES_ROOT/en/**/*.json"
+            )"
+          fi
+
+          if [[ -z "$files" ]]; then
+            echo "has_files=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_files=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "files<<EOF"
+              echo "$files"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Generate translations
-        uses: peter-calabrese/localization@v1
+        if: steps.locales.outputs.has_files == 'true'
+        uses: YOUR_OWNER/localization@v1
         with:
-          files: |
-            src/locales/en/common/app.json
-            src/locales/en/components/textField.json
+          files: ${{ steps.locales.outputs.files }}
         env:
-          LOCALES_ROOT: src/locales
+          LOCALES_ROOT: ${{ vars.LOCALES_ROOT }}
           AZURE_TRANSLATOR_KEY: ${{ secrets.AZURE_TRANSLATOR_KEY }}
           AZURE_TRANSLATOR_REGION: ${{ secrets.AZURE_TRANSLATOR_REGION }}
 
       - name: Open translation pull request
+        if: steps.locales.outputs.has_files == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -40,8 +73,10 @@ jobs:
           commit-message: "chore: update translations"
           title: "chore: update translations"
           body: |
-            Automated translation update generated from the English locale files.
+            Automated translations for changed English locale files.
+
+            Source commit: ${{ github.sha }}
           add-paths: |
-            src/locales/es/**
-            src/locales/fr/**
+            ${{ vars.LOCALES_ROOT }}/es/**
+            ${{ vars.LOCALES_ROOT }}/fr/**
             .translation-cache/cache.json
