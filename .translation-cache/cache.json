@@ -1,2 +1,64 @@
 {
+  "ach/confirmation-page": {
+    "confirm": {
+      "source": "Confirm",
+      "languages": [
+        "es",
+        "fr",
+        "ja"
+      ]
+    },
+    "deny": {
+      "source": "Deny",
+      "languages": [
+        "es",
+        "fr",
+        "ja"
+      ]
+    },
+    "error": {
+      "source": "ACH errr, please try again",
+      "languages": [
+        "es",
+        "fr",
+        "ja"
+      ]
+    }
+  },
+  "common/app": {
+    "previous": {
+      "source": "Previous",
+      "languages": [
+        "es",
+        "fr",
+        "ja"
+      ]
+    },
+    "nested.nestedKey": {
+      "source": "Nested Key",
+      "languages": [
+        "es",
+        "fr",
+        "ja"
+      ]
+    },
+    "someotherkey": {
+      "source": "hello world",
+      "languages": [
+        "es",
+        "fr",
+        "ja"
+      ]
+    }
+  },
+  "components/textField": {
+    "errorMessage": {
+      "source": "Must enter {{minLength}} characters ",
+      "languages": [
+        "es",
+        "fr",
+        "ja"
+      ]
+    }
+  }
 }
