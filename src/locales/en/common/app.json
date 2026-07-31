@@ -2,5 +2,6 @@
     "previous": "Previous",
     "nested":{
         "nestedKey": "Nested Key"
-    }
+    },
+    "someotherkey: "hello world"
 }
