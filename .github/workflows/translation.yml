@@ -55,7 +55,7 @@ jobs:
 
       - name: Generate translations
         if: steps.locales.outputs.has_files == 'true'
-        uses: YOUR_OWNER/localization@v1
+        uses: peter-calabrese/localization@v1
         with:
           files: ${{ steps.locales.outputs.files }}
         env:
