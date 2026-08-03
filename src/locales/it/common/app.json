@@ -1,0 +1,7 @@
+{
+  "previous": "Precedente",
+  "nested": {
+    "nestedKey": "Chiavi annidata"
+  },
+  "someotherkey": "Ciao mondo"
+}

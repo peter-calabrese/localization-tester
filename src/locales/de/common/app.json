@@ -1,0 +1,7 @@
+{
+  "previous": "Früher",
+  "nested": {
+    "nestedKey": "Verschachtelter Schlüssel"
+  },
+  "someotherkey": "Hallo Welt"
+}
