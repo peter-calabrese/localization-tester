@@ -3,5 +3,6 @@
   "nested": {
     "nestedKey": "ネストされた鍵"
   },
-  "someotherkey": "こんにちは、世界"
+  "someotherkey": "こんにちは、世界",
+  "testKey": "これはテストだ"
 }

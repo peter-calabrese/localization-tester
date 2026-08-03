@@ -7,7 +7,8 @@
         "fr",
         "ja",
         "de",
-        "it"
+        "it",
+        "ar"
       ]
     },
     "deny": {
@@ -17,7 +18,8 @@
         "fr",
         "ja",
         "de",
-        "it"
+        "it",
+        "ar"
       ]
     },
     "error": {
@@ -27,7 +29,8 @@
         "fr",
         "ja",
         "de",
-        "it"
+        "it",
+        "ar"
       ]
     }
   },
@@ -39,7 +42,8 @@
         "fr",
         "ja",
         "de",
-        "it"
+        "it",
+        "ar"
       ]
     },
     "nested.nestedKey": {
@@ -49,7 +53,8 @@
         "fr",
         "ja",
         "de",
-        "it"
+        "it",
+        "ar"
       ]
     },
     "someotherkey": {
@@ -59,7 +64,19 @@
         "fr",
         "ja",
         "de",
-        "it"
+        "it",
+        "ar"
+      ]
+    },
+    "testKey": {
+      "source": "This is a test",
+      "languages": [
+        "es",
+        "fr",
+        "ja",
+        "de",
+        "it",
+        "ar"
       ]
     }
   },
@@ -71,7 +88,8 @@
         "fr",
         "ja",
         "de",
-        "it"
+        "it",
+        "ar"
       ]
     }
   }

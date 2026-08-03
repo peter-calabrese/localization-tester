@@ -3,5 +3,6 @@
   "nested": {
     "nestedKey": "Chiavi annidata"
   },
-  "someotherkey": "Ciao mondo"
+  "someotherkey": "Ciao mondo",
+  "testKey": "Questa è una prova"
 }

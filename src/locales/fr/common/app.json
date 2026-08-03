@@ -3,5 +3,6 @@
   "nested": {
     "nestedKey": "Clé imbriquée"
   },
-  "someotherkey": "Bonjour le monde"
+  "someotherkey": "Bonjour le monde",
+  "testKey": "C’est un test"
 }

@@ -3,5 +3,6 @@
   "nested": {
     "nestedKey": "Verschachtelter Schlüssel"
   },
-  "someotherkey": "Hallo Welt"
+  "someotherkey": "Hallo Welt",
+  "testKey": "Das ist ein Test"
 }

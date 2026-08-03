@@ -1,0 +1,8 @@
+{
+  "previous": "السابق",
+  "nested": {
+    "nestedKey": "المفتاح المتداخل"
+  },
+  "someotherkey": "مرحبا بالعالم",
+  "testKey": "هذا اختبار"
+}
