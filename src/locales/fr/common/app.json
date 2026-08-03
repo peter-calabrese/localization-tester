@@ -1,0 +1,8 @@
+{
+  "previous": "Précédent",
+  "nested": {
+    "nestedKey": "Clé imbriquée"
+  },
+  "someotherkey": "Bonjour le monde",
+  "testKey": "C’est un test"
+}
