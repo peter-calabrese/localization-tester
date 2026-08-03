@@ -3,5 +3,6 @@
     "nested":{
         "nestedKey": "Nested Key"
     },
-    "someotherkey": "hello world" 
+    "someotherkey": "hello world",
+    "testKey": "This is a test"
 }
