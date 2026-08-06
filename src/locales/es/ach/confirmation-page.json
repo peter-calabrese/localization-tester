@@ -1,5 +1,6 @@
 {
   "confirm": "Confirmar",
   "deny": "Negar",
-  "error": "¡Hola, estás experimentando un error!"
+  "error": "¡Hola, estás experimentando un error!",
+  "hello": "Hola, ¿qué tal?"
 }

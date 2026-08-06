@@ -1,5 +1,6 @@
 {
   "confirm": "確認してください",
   "deny": "否定",
-  "error": "some change from legal"
+  "error": "some change from legal",
+  "hello": "こんにちは、お元気ですか?"
 }
