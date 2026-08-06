@@ -23,6 +23,14 @@
         "fr",
         "ja"
       ]
+    },
+    "hello": {
+      "source": "Hello there, how are you?",
+      "languages": [
+        "es",
+        "fr",
+        "ja"
+      ]
     }
   },
   "common/app": {
