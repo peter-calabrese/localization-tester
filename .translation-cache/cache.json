@@ -1,3 +1,85 @@
 {
-
+  "ach/confirmation-page": {
+    "confirm": {
+      "source": "Confirm",
+      "languages": [
+        "es",
+        "fr",
+        "ja",
+        "de",
+        "it"
+      ]
+    },
+    "deny": {
+      "source": "Deny",
+      "languages": [
+        "es",
+        "fr",
+        "ja",
+        "de",
+        "it"
+      ]
+    },
+    "error": {
+      "source": "Hello there, you are experiencing an error!",
+      "languages": [
+        "es",
+        "fr",
+        "ja",
+        "de",
+        "it"
+      ]
+    }
+  },
+  "common/app": {
+    "previous": {
+      "source": "Previous",
+      "languages": [
+        "es",
+        "fr",
+        "ja",
+        "de",
+        "it"
+      ]
+    },
+    "nested.nestedKey": {
+      "source": "Nested Key",
+      "languages": [
+        "es",
+        "fr",
+        "ja",
+        "de",
+        "it"
+      ]
+    },
+    "someotherkey": {
+      "source": "hello world",
+      "languages": [
+        "es",
+        "fr",
+        "ja",
+        "de",
+        "it"
+      ]
+    },
+    "testKey": {
+      "source": "This is a test",
+      "languages": [
+        "es",
+        "fr"
+      ]
+    }
+  },
+  "components/textField": {
+    "errorMessage": {
+      "source": "Must enter {{minLength}} characters ",
+      "languages": [
+        "es",
+        "fr",
+        "ja",
+        "de",
+        "it"
+      ]
+    }
+  }
 }
