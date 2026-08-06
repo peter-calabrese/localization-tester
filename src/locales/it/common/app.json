@@ -1,0 +1,8 @@
+{
+  "previous": "Precedente",
+  "nested": {
+    "nestedKey": "Chiavi annidata"
+  },
+  "someotherkey": "Ciao mondo",
+  "testKey": "Questa è una prova"
+}
